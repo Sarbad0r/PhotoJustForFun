@@ -1,7 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 class PhotoSrc {
-  String? avg_color;
+  String? original;
   String? large2x;
   String? large;
   String? medium;
@@ -11,7 +11,7 @@ class PhotoSrc {
   String? tiny;
 
   PhotoSrc(
-      {this.avg_color,
+      {this.original,
       this.large2x,
       this.large,
       this.medium,
@@ -19,4 +19,16 @@ class PhotoSrc {
       this.portrait,
       this.landscape,
       this.tiny});
+
+  factory PhotoSrc.from_json(Map<String, dynamic> json) {
+    return PhotoSrc(
+        original: json['original'],
+        large2x: json['large2x'],
+        large: json['large'],
+        medium: json['medium'],
+        small: json['small'],
+        portrait: json['portrait'],
+        landscape: json['landscape'],
+        tiny: json['tiny']);
+  }
 }
