@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "898554633550",
+    "project_id": "photojustforfun-8764b",
+    "storage_bucket": "photojustforfun-8764b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:898554633550:android:21c842465aab266816d21f",
+        "android_client_info": {
+          "package_name": "com.example.photo_just_for_fun"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "898554633550-u8k7le3f5sfr45k0h8mk5a1b8t4cdqdn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.photo_just_for_fun",
+            "certificate_hash": "b0122698ea3c008de53f84f677e2b845a19be868"
+          }
+        },
+        {
+          "client_id": "898554633550-lh0h4h6h1r7no4p40gckk8spk5cs9ihe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBL7mxdcsZiQB1eJBUaAwAnVsx2U_kIAi8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "898554633550-lh0h4h6h1r7no4p40gckk8spk5cs9ihe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

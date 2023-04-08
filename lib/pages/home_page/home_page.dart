@@ -1,20 +1,28 @@
 //ignore_for_file: non_constant_identifier_names
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:photo_just_for_fun/api/utils/firebase_auth_fun.dart';
 import 'package:photo_just_for_fun/api/utils/permanent_functions.dart';
 import 'package:photo_just_for_fun/bloc/main_home_page_bloc/home_page_bloc_events.dart';
 import 'package:photo_just_for_fun/bloc/main_home_page_bloc/home_page_bloc_states.dart';
 import 'package:photo_just_for_fun/bloc/main_home_page_bloc/main_home_page_bloc.dart';
-import 'package:photo_just_for_fun/pages/home_page/widgets/photo_home_page_widgetg.dart';
+import 'package:photo_just_for_fun/pages/home_page/widgets/photo_home_page_widget.dart';
 import 'package:photo_just_for_fun/widgets/animted_app_bar.dart';
 import 'package:photo_just_for_fun/widgets/cache_network_image_widget.dart';
+import 'package:photo_just_for_fun/widgets/icon_button_widget.dart';
 import 'package:photo_just_for_fun/widgets/loading_progress_widget.dart';
 import 'package:photo_just_for_fun/widgets/shimmer_container.dart';
 import 'package:photo_just_for_fun/widgets/text_widget.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final PersistentTabController persistentNavController;
+
+  const HomePage({Key? key, required this.persistentNavController})
+      : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -49,7 +57,20 @@ class _HomePageState extends State<HomePage> {
                       text: "Photos",
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
-                      size: 24)),
+                      size: 24),
+                  actions: [
+                    IconButtonWidget(
+                        voidCallback: () async {
+                          FirebaseAuthFunc.phoneFirebaseAuth("915172589")
+                              .then((value) async {
+                            await Future.delayed(const Duration(seconds: 5));
+                            await FirebaseAuthFunc.verifyFirebaseAuth(
+                                value['verificationId'], '511111');
+                          });
+                        },
+                        icon: CupertinoIcons.search,
+                        iconColor: Colors.black)
+                  ]),
               body: Padding(
                   padding: const EdgeInsets.only(left: 7, right: 10, top: 0),
                   child: RefreshIndicator(
@@ -84,6 +105,8 @@ class _HomePageState extends State<HomePage> {
                                   itemBuilder: (context, index) {
                                     var photo = current_state.photo_list[index];
                                     return PhotoHomePageWidget(
+                                        persistentNavController:
+                                            widget.persistentNavController,
                                         photoModel: photo);
                                   }),
                               const SizedBox(height: 10),

@@ -29,18 +29,18 @@ class PhotoModel {
       this.liked,
       this.alt});
 
-  factory PhotoModel.from_json(Map<String, dynamic> json) {
-    return PhotoModel(
-        id: json['id'],
-        width: json['width'],
-        height: json['height'],
-        url: json['url'],
-        photographer: json['photographer'],
-        photographer_url: json['photographer_url'],
-        photographer_id: json['photographer_id'],
-        avg_color: json['avg_color'],
-        photoSrc: PhotoSrc.from_json(json['src']),
-        liked: json['liked'],
-        alt: json['alt']);
-  }
+  factory PhotoModel.from_json(Map<String, dynamic> json) => PhotoModel(
+      id: json['id'],
+      width: json['width'],
+      height: json['height'],
+      url: json['url'],
+      photographer: json['photographer'],
+      photographer_url: json['photographer_url'],
+      photographer_id: json['photographer_id'],
+      avg_color: json['avg_color'],
+      photoSrc: PhotoSrc.from_json(json['src']),
+      liked: json['liked'],
+      alt: json['alt']);
+
+  Map<String, dynamic> to_json_like() => {"id": id};
 }

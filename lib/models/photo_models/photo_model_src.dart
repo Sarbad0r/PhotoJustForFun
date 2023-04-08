@@ -20,15 +20,13 @@ class PhotoSrc {
       this.landscape,
       this.tiny});
 
-  factory PhotoSrc.from_json(Map<String, dynamic> json) {
-    return PhotoSrc(
-        original: json['original'],
-        large2x: json['large2x'],
-        large: json['large'],
-        medium: json['medium'],
-        small: json['small'],
-        portrait: json['portrait'],
-        landscape: json['landscape'],
-        tiny: json['tiny']);
-  }
+  factory PhotoSrc.from_json(Map<String, dynamic> json) => PhotoSrc(
+      original: json['original'],
+      large2x: json['large2x'],
+      large: json['large'],
+      medium: json['medium'],
+      small: json['small'],
+      portrait: json['portrait'],
+      landscape: json['landscape'],
+      tiny: json['tiny']);
 }

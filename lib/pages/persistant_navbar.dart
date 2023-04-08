@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:photo_just_for_fun/bloc/log_reg_bloc/log_reg_bloc_states.dart';
+import 'package:photo_just_for_fun/bloc/log_reg_bloc/main_log_reg_bloc.dart';
 import 'package:photo_just_for_fun/bloc/main_home_page_bloc/home_page_bloc_events.dart';
 import 'package:photo_just_for_fun/bloc/main_home_page_bloc/main_home_page_bloc.dart';
 import 'package:photo_just_for_fun/pages/home_page/home_page.dart';
@@ -25,21 +27,60 @@ class _PersistentNavBarState extends State<PersistentNavBar> {
   }
 
   List<Widget> _buildScreens() {
-    return [const HomePage(), Container()];
+    return [
+      HomePage(persistentNavController: _controller),
+      Container(),
+      Container(),
+      Container()
+    ];
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
-        icon: const Icon(CupertinoIcons.home),
-        title: ("Home"),
-        activeColorPrimary: CupertinoColors.activeBlue,
+        icon: const Icon(CupertinoIcons.home, color: Colors.black),
+        inactiveIcon: const Icon(CupertinoIcons.home),
+        activeColorSecondary: Colors.black,
+        title: "Home",
+        activeColorPrimary: Colors.amber,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(CupertinoIcons.settings),
-        title: ("Settings"),
-        activeColorPrimary: CupertinoColors.activeBlue,
+        icon: const Icon(CupertinoIcons.search, color: Colors.black),
+        inactiveIcon: const Icon(CupertinoIcons.search),
+        activeColorSecondary: Colors.black,
+        title: "Search",
+        activeColorPrimary: Colors.amber,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(CupertinoIcons.heart, color: Colors.black),
+        inactiveIcon: const Icon(CupertinoIcons.heart),
+        activeColorSecondary: Colors.black,
+        title: "Search",
+        activeColorPrimary: Colors.amber,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: BlocBuilder<MainLogRegBloc, LogRegBlocStates>(
+            builder: (context, state) {
+          if (state is LogRegBlocNotRegisteredState) {
+            return const Icon(CupertinoIcons.person_add, color: Colors.black);
+          } else {
+            return const Icon(CupertinoIcons.person, color: Colors.black);
+          }
+        }),
+        title: "Profile",
+        inactiveIcon: BlocBuilder<MainLogRegBloc, LogRegBlocStates>(
+            builder: (context, state) {
+          if (state is LogRegBlocNotRegisteredState) {
+            return const Icon(CupertinoIcons.person_add);
+          } else {
+            return const Icon(CupertinoIcons.person);
+          }
+        }),
+        activeColorSecondary: Colors.black,
+        activeColorPrimary: Colors.amber,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
     ];
