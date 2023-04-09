@@ -6,9 +6,15 @@ class CachedNetworkImageWidget extends StatelessWidget {
   final double? width;
   final double? height;
   final Color? plColor;
+  final BoxFit? boxFit;
 
   const CachedNetworkImageWidget(
-      {Key? key, required this.url, this.width, this.height, this.plColor})
+      {Key? key,
+      required this.url,
+      this.width,
+      this.height,
+      this.plColor,
+      this.boxFit})
       : super(key: key);
 
   @override
@@ -22,7 +28,7 @@ class CachedNetworkImageWidget extends StatelessWidget {
             return Container(color: Colors.grey[200]);
           },
           imageUrl: url,
-          fit: BoxFit.fitWidth);
+          fit: boxFit ?? BoxFit.fitWidth);
     } else if (height == 0) {
       return CachedNetworkImage(
           placeholder: (context, url) {
@@ -32,23 +38,22 @@ class CachedNetworkImageWidget extends StatelessWidget {
             return Container(width: width, color: Colors.grey[200]);
           },
           imageUrl: url,
-          fit: BoxFit.fitWidth,
+          fit: boxFit ?? BoxFit.fitWidth,
           width: width);
     } else {
       return CachedNetworkImage(
           placeholder: (context, url) {
             return Container(
-              width: width,
-              height: height,
-              color: plColor ?? Colors.grey[200],
-            );
+                width: width,
+                height: height,
+                color: plColor ?? Colors.grey[200]);
           },
           errorWidget: (context, url, error) {
             return Container(
                 width: width, height: height, color: Colors.grey[200]);
           },
           imageUrl: url,
-          fit: BoxFit.fitWidth,
+          fit: boxFit ?? BoxFit.fitWidth,
           width: width,
           height: height);
     }

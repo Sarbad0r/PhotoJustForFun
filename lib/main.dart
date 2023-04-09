@@ -1,5 +1,11 @@
+import 'dart:io';
+
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:photo_just_for_fun/api/utils/firebase_notify.dart';
+import 'package:photo_just_for_fun/api/utils/shared_preferences.dart';
 import 'package:photo_just_for_fun/bloc/log_reg_bloc/main_log_reg_bloc.dart';
 import 'package:photo_just_for_fun/bloc/main_home_page_bloc/main_home_page_bloc.dart';
 import 'package:photo_just_for_fun/pages/home_page/home_page.dart';
@@ -15,7 +21,14 @@ import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await SharedPref.init();
+  if (defaultTargetPlatform == TargetPlatform.android ||
+      defaultTargetPlatform == TargetPlatform.iOS) {
+    await Firebase.initializeApp();
+    await FirebaseNotification.requestPermission();
+    await FirebaseNotification.getToken();
+  }
+
 
   runApp(MultiBlocProvider(
       providers: [

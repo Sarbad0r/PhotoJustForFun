@@ -7,6 +7,7 @@ import 'package:photo_just_for_fun/bloc/log_reg_bloc/main_log_reg_bloc.dart';
 import 'package:photo_just_for_fun/bloc/main_home_page_bloc/home_page_bloc_events.dart';
 import 'package:photo_just_for_fun/bloc/main_home_page_bloc/main_home_page_bloc.dart';
 import 'package:photo_just_for_fun/pages/home_page/home_page.dart';
+import 'package:photo_just_for_fun/pages/registration_page/registration_page.dart';
 
 class PersistentNavBar extends StatefulWidget {
   const PersistentNavBar({Key? key}) : super(key: key);
@@ -31,7 +32,7 @@ class _PersistentNavBarState extends State<PersistentNavBar> {
       HomePage(persistentNavController: _controller),
       Container(),
       Container(),
-      Container()
+      const RegistrationPage()
     ];
   }
 

@@ -12,6 +12,11 @@ class PermanentFunctions {
     return page;
   }
 
+  static double returnHeightLookingScreenSize(BuildContext context, int size) {
+    double screenSize = MediaQuery.of(context).size.height;
+    return (screenSize * size) / 855;
+  }
+
   static bool checkIsListHasMorePageBool(List<dynamic> list) {
     if (list.length < 15) {
       return false;

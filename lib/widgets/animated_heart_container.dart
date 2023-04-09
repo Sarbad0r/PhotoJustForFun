@@ -2,19 +2,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_just_for_fun/models/photo_models/photo_model.dart';
 
-class AnimatedHearContainer extends StatefulWidget {
+class AnimatedHeartContainer extends StatefulWidget {
   final PhotoModel photoModel;
   final VoidCallback onTap;
+  final Color? backGroundColor;
 
-  const AnimatedHearContainer(
-      {Key? key, required this.photoModel, required this.onTap})
+  const AnimatedHeartContainer(
+      {Key? key,
+      required this.photoModel,
+      required this.onTap,
+      this.backGroundColor})
       : super(key: key);
 
   @override
-  State<AnimatedHearContainer> createState() => _AnimtedHearContainerState();
+  State<AnimatedHeartContainer> createState() => _AnimtedHearContainerState();
 }
 
-class _AnimtedHearContainerState extends State<AnimatedHearContainer> {
+class _AnimtedHearContainerState extends State<AnimatedHeartContainer> {
   bool startedFunc = false;
   bool clickedWork = false;
 
@@ -27,18 +31,23 @@ class _AnimtedHearContainerState extends State<AnimatedHearContainer> {
             // color: Colors.amber,
             padding: const EdgeInsets.all(7),
             decoration: BoxDecoration(
-                color: Colors.white,
+                color: widget.backGroundColor ?? Colors.white,
                 shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.grey.shade500,
-                      blurRadius: 11,
-                      offset: const Offset(2, 2)),
-                  const BoxShadow(
-                      color: Colors.white,
-                      blurRadius: 15,
-                      offset: Offset(-2, -2))
-                ]),
+                border: (widget.photoModel.liked ?? false)
+                    ? Border.all(color: Colors.grey[300]!)
+                    : null,
+                boxShadow: (widget.photoModel.liked ?? false)
+                    ? []
+                    : [
+                        BoxShadow(
+                            color: Colors.grey.shade500,
+                            blurRadius: 11,
+                            offset: const Offset(2, 2)),
+                        const BoxShadow(
+                            color: Colors.white,
+                            blurRadius: 15,
+                            offset: Offset(-2, -2))
+                      ]),
             child: Icon(
               CupertinoIcons.heart_fill,
               size: 20,
