@@ -1,5 +1,8 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class PermanentFunctions {
@@ -57,5 +60,39 @@ class PermanentFunctions {
       return Colors.white;
     }
     return Colors.transparent;
+  }
+
+  static String? validateEmail(String? value) {
+    String pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regex = RegExp(pattern);
+    if (value == null) return null;
+    if (!regex.hasMatch(value ?? '')) return "Email error";
+    return null;
+  }
+
+  static String? checkPasswords(String? password) {
+    String? res;
+    if (password == null || password.isEmpty) {
+      res = "Password is Empty";
+    }
+    if ((password ?? '').length < 8) {
+      res = "Password length must not be less than 8";
+    }
+    return res;
+  }
+
+  static void snack_bar(String title, String message, bool error) {
+    if (error) {
+      Get.snackbar(title, message,
+          backgroundColor: Colors.redAccent,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.TOP,
+          duration: const Duration(seconds: 2));
+    } else {
+      Get.snackbar(title, message,
+          snackPosition: SnackPosition.TOP,
+          duration: const Duration(seconds: 2));
+    }
   }
 }

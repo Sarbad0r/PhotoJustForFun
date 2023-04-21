@@ -2,12 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:photo_just_for_fun/bloc/log_reg_bloc/log_reg_bloc_events.dart';
 import 'package:photo_just_for_fun/bloc/log_reg_bloc/log_reg_bloc_states.dart';
 import 'package:photo_just_for_fun/bloc/log_reg_bloc/main_log_reg_bloc.dart';
 import 'package:photo_just_for_fun/bloc/main_home_page_bloc/home_page_bloc_events.dart';
 import 'package:photo_just_for_fun/bloc/main_home_page_bloc/main_home_page_bloc.dart';
 import 'package:photo_just_for_fun/pages/home_page/home_page.dart';
 import 'package:photo_just_for_fun/pages/registration_page/registration_page.dart';
+import 'package:photo_just_for_fun/utils/shared_preferences.dart';
 
 class PersistentNavBar extends StatefulWidget {
   const PersistentNavBar({Key? key}) : super(key: key);
@@ -25,6 +27,7 @@ class _PersistentNavBarState extends State<PersistentNavBar> {
     super.initState();
     _controller = PersistentTabController(initialIndex: 0);
     context.read<MainHomePageBloc>().add(RefreshHomePageEvent());
+    context.read<MainLogRegBloc>().add(CheckTokenEvent());
   }
 
   List<Widget> _buildScreens() {

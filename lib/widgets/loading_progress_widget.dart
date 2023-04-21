@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:photo_just_for_fun/api/utils/constant.dart';
+import 'package:photo_just_for_fun/utils/constant.dart';
 
 class LoadingProgressWidget extends StatelessWidget {
   final bool showProgress;

@@ -4,9 +4,9 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:photo_just_for_fun/api/api_connections.dart';
-import 'package:photo_just_for_fun/api/utils/permanent_functions.dart';
 import 'package:photo_just_for_fun/models/photo_models/photo_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:photo_just_for_fun/utils/permanent_functions.dart';
 
 class RestApiPhoto {
   static Future<List<PhotoModel>> get_photos({int page = 1}) async {

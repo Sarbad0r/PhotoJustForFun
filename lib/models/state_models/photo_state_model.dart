@@ -1,7 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:photo_just_for_fun/api/utils/permanent_functions.dart';
 import 'package:photo_just_for_fun/models/photo_models/photo_model.dart';
+import 'package:photo_just_for_fun/utils/permanent_functions.dart';
 
 class PhotoStateModel {
   List<PhotoModel> photo_list = [];

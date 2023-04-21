@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:photo_just_for_fun/api/utils/constant.dart';
+import 'package:photo_just_for_fun/utils/constant.dart';
 
 class FirebaseAuthFunc {
   static FirebaseAuth auth = FirebaseAuth.instance;

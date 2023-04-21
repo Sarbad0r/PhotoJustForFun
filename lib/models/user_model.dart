@@ -21,4 +21,6 @@ class UserModel {
       this.img_url,
       this.created_at,
       this.updated_at});
+
+  factory UserModel.from_json(Map<String, dynamic> json) => UserModel();
 }

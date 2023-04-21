@@ -1,5 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:photo_just_for_fun/api/utils/shared_preferences.dart';
+import 'package:photo_just_for_fun/utils/shared_preferences.dart';
 
 class FirebaseNotification {
   static Future<void> requestPermission() async {

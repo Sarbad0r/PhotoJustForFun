@@ -1,5 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:photo_just_for_fun/utils/shared_preferences.dart';
+
 class ApiConnections {
   static String BACKEND_URL = "http://192.168.100.113:8000/api";
 
@@ -14,11 +16,11 @@ class ApiConnections {
     };
   }
 
-  static Future<Map<String, String>> backend_headers() async{
+  static Future<Map<String, String>> backend_headers() async {
     return <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       'Accept': 'application/json',
-      'Authorization': 'Bearer _token_'
+      'Authorization': 'Bearer ${await SharedPref.getStringPrefer('token')}'
     };
   }
 }

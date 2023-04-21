@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:photo_just_for_fun/api/utils/permanent_functions.dart';
+import 'package:photo_just_for_fun/utils/permanent_functions.dart';
 
 class AnimatedAppBar extends StatefulWidget {
   final ScrollController scrollController;
@@ -36,7 +36,7 @@ class _AnimatedAppBarState extends State<AnimatedAppBar> {
         duration: const Duration(milliseconds: 200),
         color: appBarColor,
         width: double.maxFinite,
-        padding: const EdgeInsets.only(top:25, right: 10, left: 10, bottom: 5),
+        padding: const EdgeInsets.only(top: 25, right: 10, left: 10, bottom: 5),
         child: Row(
           children: [
             Expanded(

@@ -83,11 +83,12 @@ class _PhotoHomePageWidgetState extends State<PhotoHomePageWidget> {
                                 borderRadius: const BorderRadius.only(
                                     topRight: Radius.circular(15),
                                     topLeft: Radius.circular(15)),
-                                child: CachedNetworkImageWidget(
+                                child: ImageLoaderWidget(
+                                    boxFit: BoxFit.cover,
                                     height: 250,
                                     width: double.infinity,
-                                    url:
-                                        widget.photoModel.photoSrc?.large ?? '')),
+                                    url: widget.photoModel.photoSrc?.large ??
+                                        '')),
                           ),
                         ),
                         const SizedBox(height: 20),

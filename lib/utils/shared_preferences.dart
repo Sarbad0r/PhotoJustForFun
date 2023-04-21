@@ -15,4 +15,8 @@ class SharedPref {
   static Future<String> getStringPrefer(String keyName) async {
     return sharedPreferences?.getString(keyName) ?? '';
   }
+
+  static Future<void> deletePrefer(String keyName) async {
+    await sharedPreferences?.remove(keyName);
+  }
 }

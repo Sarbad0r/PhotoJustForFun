@@ -1,61 +1,47 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
-class CachedNetworkImageWidget extends StatelessWidget {
+class ImageLoaderWidget extends StatelessWidget {
   final String url;
-  final double? width;
   final double? height;
-  final Color? plColor;
+  final double? width;
   final BoxFit? boxFit;
+  final EdgeInsets? marginShimmerContainer;
+  final EdgeInsets? paddingShimmerContainer;
 
-  const CachedNetworkImageWidget(
+  const ImageLoaderWidget(
       {Key? key,
       required this.url,
-      this.width,
       this.height,
-      this.plColor,
-      this.boxFit})
+      this.width,
+      this.boxFit,
+      this.marginShimmerContainer,
+      this.paddingShimmerContainer})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (width == 0 && height == 0) {
-      return CachedNetworkImage(
-          placeholder: (context, url) {
-            return Container(color: plColor ?? Colors.grey[200]);
-          },
-          errorWidget: (context, url, error) {
-            return Container(color: Colors.grey[200]);
-          },
-          imageUrl: url,
-          fit: boxFit ?? BoxFit.fitWidth);
-    } else if (height == 0) {
-      return CachedNetworkImage(
-          placeholder: (context, url) {
-            return Container(width: width, color: plColor ?? Colors.grey[200]);
-          },
-          errorWidget: (context, url, error) {
-            return Container(width: width, color: Colors.grey[200]);
-          },
-          imageUrl: url,
-          fit: boxFit ?? BoxFit.fitWidth,
-          width: width);
-    } else {
-      return CachedNetworkImage(
-          placeholder: (context, url) {
-            return Container(
+    return CachedNetworkImage(
+        imageUrl: url,
+        height: height,
+        width: width,
+        fit: boxFit ?? BoxFit.scaleDown,
+        placeholder: (context, url) => Shimmer.fromColors(
+            baseColor: Colors.grey[200]!,
+            highlightColor: Colors.white,
+            child: Container(
+                margin: marginShimmerContainer,
+                padding: paddingShimmerContainer,
                 width: width,
                 height: height,
-                color: plColor ?? Colors.grey[200]);
-          },
-          errorWidget: (context, url, error) {
-            return Container(
-                width: width, height: height, color: Colors.grey[200]);
-          },
-          imageUrl: url,
-          fit: boxFit ?? BoxFit.fitWidth,
-          width: width,
-          height: height);
-    }
+                decoration: BoxDecoration(
+                    color: Colors.grey.shade200,
+                    borderRadius: BorderRadius.circular(5)))),
+        errorWidget: (context, url, error) => Image.asset(
+            'assets/pictures/defaults/no_photo_256.png',
+            height: height,
+            width: width,
+            fit: BoxFit.scaleDown));
   }
 }
