@@ -10,6 +10,7 @@ import 'package:photo_just_for_fun/bloc/main_home_page_bloc/main_home_page_bloc.
 import 'package:photo_just_for_fun/pages/home_page/home_page.dart';
 import 'package:photo_just_for_fun/pages/registration_page/registration_page.dart';
 import 'package:photo_just_for_fun/utils/shared_preferences.dart';
+import 'package:photo_just_for_fun/widgets/cache_network_image_widget.dart';
 
 class PersistentNavBar extends StatefulWidget {
   const PersistentNavBar({Key? key}) : super(key: key);
@@ -68,19 +69,39 @@ class _PersistentNavBarState extends State<PersistentNavBar> {
       PersistentBottomNavBarItem(
         icon: BlocBuilder<MainLogRegBloc, LogRegBlocStates>(
             builder: (context, state) {
-          if (state is LogRegBlocNotRegisteredState) {
+          if (state is LogRegBlocLoadingState) {
+            return const SizedBox(
+                width: 20,
+                height: 20,
+                child: CircularProgressIndicator(
+                    color: Colors.amber, strokeWidth: 2));
+          } else if (state is LogRegBlocNotRegisteredState) {
             return const Icon(CupertinoIcons.person_add, color: Colors.black);
           } else {
-            return const Icon(CupertinoIcons.person, color: Colors.black);
+            return ImageLoaderWidget(
+                url: state.logRegStateModel.userModel?.img_url ?? '',
+                errorPictureUrl: '',
+                errorWidget:
+                    const Icon(CupertinoIcons.person, color: Colors.black));
           }
         }),
         title: "Profile",
         inactiveIcon: BlocBuilder<MainLogRegBloc, LogRegBlocStates>(
             builder: (context, state) {
-          if (state is LogRegBlocNotRegisteredState) {
+          if (state is LogRegBlocLoadingState) {
+            return const SizedBox(
+                width: 20,
+                height: 20,
+                child: CircularProgressIndicator(
+                    color: Colors.amber, strokeWidth: 2));
+          } else if (state is LogRegBlocNotRegisteredState) {
             return const Icon(CupertinoIcons.person_add);
           } else {
-            return const Icon(CupertinoIcons.person);
+            return ImageLoaderWidget(
+                url: state.logRegStateModel.userModel?.img_url ?? '',
+                errorPictureUrl: '',
+                errorWidget:
+                const Icon(CupertinoIcons.person));
           }
         }),
         activeColorSecondary: Colors.black,

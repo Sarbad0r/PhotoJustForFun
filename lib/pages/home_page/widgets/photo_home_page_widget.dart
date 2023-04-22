@@ -87,8 +87,10 @@ class _PhotoHomePageWidgetState extends State<PhotoHomePageWidget> {
                                     boxFit: BoxFit.cover,
                                     height: 250,
                                     width: double.infinity,
-                                    url: widget.photoModel.photoSrc?.large ??
-                                        '')),
+                                    url:
+                                        widget.photoModel.photoSrc?.large ?? '',
+                                    errorPictureUrl:
+                                        "assets/images/placeholder-image.png")),
                           ),
                         ),
                         const SizedBox(height: 20),

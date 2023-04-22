@@ -1,9 +1,15 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'dart:io';
+import 'package:easy_localization/easy_localization.dart' as loc;
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:image_picker/image_picker.dart';
 
 class PermanentFunctions {
   static int checkIsListHasMorePageInt(List<dynamic> list, int page) {
@@ -94,5 +100,38 @@ class PermanentFunctions {
           snackPosition: SnackPosition.TOP,
           duration: const Duration(seconds: 2));
     }
+  }
+
+  static Future<File?> pickImage() async {
+    File? imageFile;
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+      if (image == null) return null;
+      final path = File(image.path);
+
+      imageFile = await testCompressAndGetFile(path, path.toString());
+    } catch (e) {
+      PermanentFunctions.snack_bar(
+          loc.tr("image_error"), loc.tr("choose_another_one"), true);
+    }
+    return imageFile;
+  }
+
+  static Future<File>? testCompressAndGetFile(
+      File file, String targetPath) async {
+    final filePath = file.absolute.path;
+
+    // Create output file path
+    // eg:- "Volume/VM/abcd_out.jpeg"
+    final lastIndex = filePath.lastIndexOf(RegExp(r'.jp'));
+    final splitted = filePath.substring(0, (lastIndex));
+    final outPath = "${splitted}_out${filePath.substring(lastIndex)}";
+    var result = await FlutterImageCompress.compressAndGetFile(
+        file.absolute.path, outPath,
+        minHeight: 1024, minWidth: 1024, quality: 20);
+    //print(file.lengthSync());
+    //print(result?.lengthSync());
+    return result!;
   }
 }

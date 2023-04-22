@@ -1,0 +1,12 @@
+{
+  "do_your_first_project": "Создай свой первый проект",
+  "get_reviews_views_and_ratings_public_projects_can_be_deselected_as_popular_by_curators": "Получайте отзывы, просмотры и оценки. Общедоступные проекты могут быть отменчены как популярные кураторыю",
+  "change_profile" : "Изменение профиля",
+  "save" : "Сохранить",
+  "name": "Имя",
+  "last_name" : "Фамилия",
+  "profession_and_job" : "Профессия / должность",
+  "company" : "Компания",
+  "image_error" : "Ошибка Изображения",
+  "choose_another_one" : "Выберите другое изоброжение"
+}

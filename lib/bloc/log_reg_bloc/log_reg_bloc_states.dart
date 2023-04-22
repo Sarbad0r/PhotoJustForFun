@@ -18,6 +18,15 @@ class LogRegBlocNotRegisteredState extends LogRegBlocStates {
   }
 }
 
+class LogRegBlocLoadingState extends LogRegBlocStates {
+  LogRegBlocLoadingState(LogRegStateModel logRegStateModel)
+      : super(logRegStateModel: logRegStateModel);
+
+  factory LogRegBlocLoadingState.from_state(LogRegStateModel logRegStateModel) {
+    return LogRegBlocLoadingState(logRegStateModel);
+  }
+}
+
 class LogRegBlocRegisteredState extends LogRegBlocStates {
   LogRegBlocRegisteredState(LogRegStateModel logRegStateModel)
       : super(logRegStateModel: logRegStateModel);

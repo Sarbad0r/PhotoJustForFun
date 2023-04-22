@@ -9,15 +9,19 @@ class ImageLoaderWidget extends StatelessWidget {
   final BoxFit? boxFit;
   final EdgeInsets? marginShimmerContainer;
   final EdgeInsets? paddingShimmerContainer;
+  final String errorPictureUrl;
+  final Widget? errorWidget;
 
   const ImageLoaderWidget(
       {Key? key,
       required this.url,
+      required this.errorPictureUrl,
       this.height,
       this.width,
       this.boxFit,
       this.marginShimmerContainer,
-      this.paddingShimmerContainer})
+      this.paddingShimmerContainer,
+      this.errorWidget})
       : super(key: key);
 
   @override
@@ -38,10 +42,9 @@ class ImageLoaderWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Colors.grey.shade200,
                     borderRadius: BorderRadius.circular(5)))),
-        errorWidget: (context, url, error) => Image.asset(
-            'assets/pictures/defaults/no_photo_256.png',
-            height: height,
-            width: width,
-            fit: BoxFit.scaleDown));
+        errorWidget: (context, url, error) =>
+            errorWidget ??
+            Image.asset(errorPictureUrl,
+                height: height, width: width, fit: BoxFit.scaleDown));
   }
 }

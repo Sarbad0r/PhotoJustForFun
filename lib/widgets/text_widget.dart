@@ -9,6 +9,7 @@ class TextWidget extends StatelessWidget {
   final TextDecoration? textDecoration;
   final TextOverflow? overFlow;
   final TextAlign? textAlign;
+  final double? letterSpace;
 
   const TextWidget(
       {Key? key,
@@ -19,7 +20,8 @@ class TextWidget extends StatelessWidget {
       this.maxLines,
       this.textDecoration,
       this.overFlow,
-      this.textAlign})
+      this.textAlign,
+      this.letterSpace})
       : super(key: key);
 
   @override
@@ -28,6 +30,7 @@ class TextWidget extends StatelessWidget {
         maxLines: maxLines,
         textAlign: textAlign,
         style: TextStyle(
+            letterSpacing: letterSpace,
             color: color ?? Colors.black,
             fontSize: size ?? 14,
             fontWeight: fontWeight ?? FontWeight.normal,

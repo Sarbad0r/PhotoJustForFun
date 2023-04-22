@@ -40,7 +40,8 @@ class RestApiLogAndRegistration {
   static Future<Map<String, dynamic>> check_token(String? token) async {
     Map<String, dynamic> results = {};
     try {
-      var response = await http.get(Uri.parse("${ApiConnections.BACKEND_URL}/check/token"),
+      var response = await http.get(
+          Uri.parse("${ApiConnections.BACKEND_URL}/check/token"),
           headers: await ApiConnections.backend_headers());
       debugPrint("response check_token: ${response.body}");
       if (response.statusCode == 200) {
@@ -50,5 +51,35 @@ class RestApiLogAndRegistration {
       debugPrint("$e");
     }
     return results;
+  }
+
+  static Future<UserModel?> update_user_model(
+      Map<String, dynamic> data, String? imagePath) async {
+    UserModel? userModel;
+    try {
+      var req = http.MultipartRequest(
+          'POST', Uri.parse('${ApiConnections.BACKEND_URL}/update/profile'))
+        ..headers.addAll(await ApiConnections.backend_headers())
+        ..fields.addAll({'user_fields': jsonEncode(data)});
+
+      if (imagePath != null) {
+        print("image path:  $imagePath");
+        req.files.add(
+            await http.MultipartFile.fromPath("${data['user_id']}", imagePath));
+      }
+
+      var res = await req.send();
+      final respStr = await res.stream.bytesToString();
+      debugPrint("change profile api ${respStr}");
+      if (res.statusCode == 200) {
+        Map<String, dynamic> json = jsonDecode(respStr);
+        if (json['success'] == true) {
+          userModel = UserModel.from_json(json['user']);
+        }
+      }
+    } catch (e) {
+      print(e);
+    }
+    return userModel;
   }
 }

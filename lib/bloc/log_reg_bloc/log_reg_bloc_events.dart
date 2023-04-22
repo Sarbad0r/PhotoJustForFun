@@ -21,3 +21,26 @@ class RegisterEvent extends LogRegBlocEvents {}
 class CheckTokenEvent extends LogRegBlocEvents {}
 
 class ShowPasswordEvent extends LogRegBlocEvents {}
+
+class PickImageEvent extends LogRegBlocEvents {}
+
+class SetNullImageBeforeGoingBeckEvent extends LogRegBlocEvents {
+  BuildContext context;
+
+  SetNullImageBeforeGoingBeckEvent({required this.context});
+}
+
+class SaveProfileUpdatedEvent extends LogRegBlocEvents {
+  String name;
+  String last_name;
+  String prof;
+  String company;
+  BuildContext context;
+
+  SaveProfileUpdatedEvent(
+      {required this.name,
+      required this.last_name,
+      required this.prof,
+      required this.company,
+      required this.context});
+}

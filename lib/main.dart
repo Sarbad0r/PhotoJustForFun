@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +9,7 @@ import 'package:photo_just_for_fun/pages/persistant_navbar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:photo_just_for_fun/utils/firebase_notify.dart';
 import 'package:photo_just_for_fun/utils/shared_preferences.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 // Future<void> initializeDefault() async {
 //   Firebase app = await Firebase.initializeApp(
@@ -23,6 +21,7 @@ import 'package:photo_just_for_fun/utils/shared_preferences.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPref.init();
+  await EasyLocalization.ensureInitialized();
   if (defaultTargetPlatform == TargetPlatform.android ||
       defaultTargetPlatform == TargetPlatform.iOS) {
     await Firebase.initializeApp();
@@ -30,15 +29,31 @@ void main() async {
     await FirebaseNotification.getToken();
   }
 
-
-  runApp(MultiBlocProvider(
-      providers: [
-        //photo main bloc
-        BlocProvider(create: (context) => MainHomePageBloc()),
-        //login and registration bloc
-        BlocProvider(create: (context) => MainLogRegBloc())
-      ],
-      child: const GetMaterialApp(
-          debugShowCheckedModeBanner: false, home: PersistentNavBar())));
+  runApp(EasyLocalization(
+      supportedLocales: const [Locale('ru')],
+      path: 'assets/language',
+      child: const App()));
 }
+
+class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+        providers: [
+          //photo main bloc
+          BlocProvider(create: (context) => MainHomePageBloc()),
+          //login and registration bloc
+          BlocProvider(create: (context) => MainLogRegBloc())
+        ],
+        child: GetMaterialApp(
+            locale: context.locale,
+            supportedLocales: context.supportedLocales,
+            localizationsDelegates: context.localizationDelegates,
+            debugShowCheckedModeBanner: false,
+            home: const PersistentNavBar()));
+  }
+}
+
 //xbzGzuMrIvb5WTcVeeQvBx2BNE04zfS4NhFJXsFQv7InLOAMEmHSueBR
