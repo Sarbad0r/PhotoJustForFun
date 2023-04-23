@@ -1,6 +1,5 @@
 //ignore_for_file: non_constant_identifier_names
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,13 +7,11 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:photo_just_for_fun/bloc/main_home_page_bloc/home_page_bloc_events.dart';
 import 'package:photo_just_for_fun/bloc/main_home_page_bloc/home_page_bloc_states.dart';
 import 'package:photo_just_for_fun/bloc/main_home_page_bloc/main_home_page_bloc.dart';
+import 'package:photo_just_for_fun/pages/home_page/widgets/photo_home_page_loading_widget.dart';
 import 'package:photo_just_for_fun/pages/home_page/widgets/photo_home_page_widget.dart';
 import 'package:photo_just_for_fun/utils/firebase_auth_fun.dart';
-import 'package:photo_just_for_fun/widgets/animted_app_bar.dart';
-import 'package:photo_just_for_fun/widgets/cache_network_image_widget.dart';
 import 'package:photo_just_for_fun/widgets/icon_button_widget.dart';
 import 'package:photo_just_for_fun/widgets/loading_progress_widget.dart';
-import 'package:photo_just_for_fun/widgets/shimmer_container.dart';
 import 'package:photo_just_for_fun/widgets/text_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -89,10 +86,7 @@ class _HomePageState extends State<HomePage> {
                                     const SizedBox(height: 15),
                                 itemCount: 15,
                                 itemBuilder: (context, index) =>
-                                    const ShimmerContainer(
-                                        width: double.maxFinite,
-                                        height: 200,
-                                        borderRadius: 10))
+                                    const PhotoHomePageLoadingWidget())
                           else if (state is HomePageInitialState)
                             Column(children: [
                               ListView.separated(

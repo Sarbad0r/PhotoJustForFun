@@ -11,6 +11,7 @@ import 'package:photo_just_for_fun/pages/home_page/home_page.dart';
 import 'package:photo_just_for_fun/pages/registration_page/registration_page.dart';
 import 'package:photo_just_for_fun/utils/shared_preferences.dart';
 import 'package:photo_just_for_fun/widgets/cache_network_image_widget.dart';
+import 'package:easy_localization/easy_localization.dart' as loc;
 
 class PersistentNavBar extends StatefulWidget {
   const PersistentNavBar({Key? key}) : super(key: key);
@@ -46,7 +47,7 @@ class _PersistentNavBarState extends State<PersistentNavBar> {
         icon: const Icon(CupertinoIcons.home, color: Colors.black),
         inactiveIcon: const Icon(CupertinoIcons.home),
         activeColorSecondary: Colors.black,
-        title: "Home",
+        title: loc.tr("home"),
         activeColorPrimary: Colors.amber,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
@@ -54,7 +55,7 @@ class _PersistentNavBarState extends State<PersistentNavBar> {
         icon: const Icon(CupertinoIcons.search, color: Colors.black),
         inactiveIcon: const Icon(CupertinoIcons.search),
         activeColorSecondary: Colors.black,
-        title: "Search",
+        title: loc.tr("search"),
         activeColorPrimary: Colors.amber,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
@@ -62,7 +63,7 @@ class _PersistentNavBarState extends State<PersistentNavBar> {
         icon: const Icon(CupertinoIcons.heart, color: Colors.black),
         inactiveIcon: const Icon(CupertinoIcons.heart),
         activeColorSecondary: Colors.black,
-        title: "Search",
+        title: loc.tr("likes"),
         activeColorPrimary: Colors.amber,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
@@ -78,14 +79,20 @@ class _PersistentNavBarState extends State<PersistentNavBar> {
           } else if (state is LogRegBlocNotRegisteredState) {
             return const Icon(CupertinoIcons.person_add, color: Colors.black);
           } else {
-            return ImageLoaderWidget(
-                url: state.logRegStateModel.userModel?.img_url ?? '',
-                errorPictureUrl: '',
-                errorWidget:
-                    const Icon(CupertinoIcons.person, color: Colors.black));
+            return ClipOval(
+              child: SizedBox(
+                width: 25,
+                child: ImageLoaderWidget(
+                    url: state.logRegStateModel.userModel?.img_url ?? '',
+                    errorPictureUrl: '',
+                    errorWidget:
+                        const Icon(CupertinoIcons.person, color: Colors.black),
+                    boxFit: BoxFit.cover),
+              ),
+            );
           }
         }),
-        title: "Profile",
+        title: loc.tr("profile"),
         inactiveIcon: BlocBuilder<MainLogRegBloc, LogRegBlocStates>(
             builder: (context, state) {
           if (state is LogRegBlocLoadingState) {
@@ -97,11 +104,16 @@ class _PersistentNavBarState extends State<PersistentNavBar> {
           } else if (state is LogRegBlocNotRegisteredState) {
             return const Icon(CupertinoIcons.person_add);
           } else {
-            return ImageLoaderWidget(
-                url: state.logRegStateModel.userModel?.img_url ?? '',
-                errorPictureUrl: '',
-                errorWidget:
-                const Icon(CupertinoIcons.person));
+            return ClipOval(
+              child: SizedBox(
+                width: 25,
+                child: ImageLoaderWidget(
+                    url: state.logRegStateModel.userModel?.img_url ?? '',
+                    errorPictureUrl: '',
+                    errorWidget: const Icon(CupertinoIcons.person),
+                    boxFit: BoxFit.cover),
+              ),
+            );
           }
         }),
         activeColorSecondary: Colors.black,

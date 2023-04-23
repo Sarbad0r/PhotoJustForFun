@@ -18,6 +18,7 @@ class LogRegStateModel {
 
   void save_user(Map<String, dynamic> data) async {
     userModel = UserModel.from_json(data['user']);
+    userModel?.setNetworkImage();
     await SharedPref.saveStringPrefer(keyName: 'token', value: data['token']);
   }
 }

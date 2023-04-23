@@ -50,6 +50,7 @@ class MainLogRegBloc extends Bloc<LogRegBlocEvents, LogRegBlocStates> {
           .then((value) {
         if (value['success'] == true) {
           getState.userModel = UserModel.from_json(value['user']);
+          getState.userModel?.setNetworkImage();
           emit(LogRegBlocRegisteredState(getState));
         } else {
           emit(LogRegBlocNotRegisteredState(getState));
@@ -92,14 +93,14 @@ class MainLogRegBloc extends Bloc<LogRegBlocEvents, LogRegBlocStates> {
         'last_name': event.last_name,
         'prof': event.prof,
         "company": event.company,
-        "user_id": getState.userModel?.id
+        "user_id": getState.userModel?.id,
+        "image_path": getState.image?.path
       };
       print('sending data: ${data}');
-      await RestApiLogAndRegistration.update_user_model(
-              data, getState.image?.path)
-          .then((value) {
+      await RestApiLogAndRegistration.update_user_model(data).then((value) {
         if (value != null) {
           getState.userModel = value;
+          getState.userModel?.setNetworkImage();
           getState.image = null;
           Navigator.pop(event.context);
         }

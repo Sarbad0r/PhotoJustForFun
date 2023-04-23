@@ -58,12 +58,12 @@ class RegisteredScreen extends StatelessWidget {
                                     child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
-                                        children: const [
-                                          Icon(Icons.edit,
+                                        children: [
+                                          const Icon(Icons.edit,
                                               size: 15, color: Colors.amber),
-                                          SizedBox(width: 10),
+                                          const SizedBox(width: 10),
                                           TextWidget(
-                                              text: "Edit Profile",
+                                              text: "edit_profile".tr(),
                                               size: 13,
                                               letterSpace: 1.1,
                                               fontWeight: FontWeight.bold,

@@ -29,15 +29,19 @@ class _ProfileCircleImageState extends State<ProfileCircleImage> {
                   height: taped ? 105 : 110,
                   color: Colors.white,
                   child: Center(
-                      child: ClipOval(
-                          child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 200),
-                              width: taped ? 90 : 95,
-                              height: taped ? 90 : 95,
-                              child: ImageLoaderWidget(
-                                  url: getState.userModel?.img_url ?? '',
-                                  errorPictureUrl:
-                                      'assets/images/placeholder-image.png')))))));
+                      child: Hero(
+                    tag: "user_profile_image",
+                    child: ClipOval(
+                        child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            width: taped ? 90 : 95,
+                            height: taped ? 90 : 95,
+                            child: ImageLoaderWidget(
+                                url: getState.userModel?.img_url ?? '',
+                                errorPictureUrl:
+                                    'assets/images/placeholder-image.png',
+                                boxFit: BoxFit.cover))),
+                  )))));
     });
   }
 }

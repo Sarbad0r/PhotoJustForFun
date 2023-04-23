@@ -45,6 +45,6 @@ class ImageLoaderWidget extends StatelessWidget {
         errorWidget: (context, url, error) =>
             errorWidget ??
             Image.asset(errorPictureUrl,
-                height: height, width: width, fit: BoxFit.scaleDown));
+                height: height, width: width, fit: boxFit ?? BoxFit.scaleDown));
   }
 }

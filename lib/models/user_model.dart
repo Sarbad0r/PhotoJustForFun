@@ -1,5 +1,8 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:photo_just_for_fun/api/api_connections.dart';
+import 'package:photo_just_for_fun/utils/permanent_functions.dart';
+
 class UserModel {
   int? id;
   String? name;
@@ -45,5 +48,12 @@ class UserModel {
   String? getName() {
     if (name == null && last_name == null) return '';
     return "${name ?? ''} ${last_name ?? ''}";
+  }
+
+  void setNetworkImage() async {
+    String currentDatetime =
+        PermanentFunctions.cutAllSpaceFromText(DateTime.now().toString());
+    img_url =
+        "${ApiConnections.BACKEND_URL}/get/user/image/$id?v=$currentDatetime";
   }
 }

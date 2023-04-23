@@ -134,4 +134,14 @@ class PermanentFunctions {
     //print(result?.lengthSync());
     return result!;
   }
+
+  static String cutAllSpaceFromText(String text) {
+    String temp = '';
+    for (int i = 0; i < text.length; i++) {
+      if (text[i] == ' ') continue;
+      temp += text[i];
+    }
+    return temp;
+  }
+
 }

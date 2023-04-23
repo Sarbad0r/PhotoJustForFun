@@ -53,8 +53,7 @@ class RestApiLogAndRegistration {
     return results;
   }
 
-  static Future<UserModel?> update_user_model(
-      Map<String, dynamic> data, String? imagePath) async {
+  static Future<UserModel?> update_user_model(Map<String, dynamic> data) async {
     UserModel? userModel;
     try {
       var req = http.MultipartRequest(
@@ -62,10 +61,10 @@ class RestApiLogAndRegistration {
         ..headers.addAll(await ApiConnections.backend_headers())
         ..fields.addAll({'user_fields': jsonEncode(data)});
 
-      if (imagePath != null) {
-        print("image path:  $imagePath");
-        req.files.add(
-            await http.MultipartFile.fromPath("${data['user_id']}", imagePath));
+      if (data['image_path'] != null) {
+        print("image path:  ${data['image_path']}");
+        req.files.add(await http.MultipartFile.fromPath(
+            "${data['user_id']}", "${data['image_path']}"));
       }
 
       var res = await req.send();

@@ -8,5 +8,12 @@
   "profession_and_job" : "Profession / Job",
   "company" : "Company",
   "image_error" : "Image Error",
-  "choose_another_one" : "Choose another one"
+  "choose_another_one" : "Choose another one",
+  "edit_profile" : "Edit Profile",
+  "error" : "Error",
+  "error_clicking_like_plz_try_later" : "Error clicking like. Please try later",
+  "home" : "Home",
+  "search" : "Search",
+  "likes" : "Likes",
+  "profile" : "Profile"
 }

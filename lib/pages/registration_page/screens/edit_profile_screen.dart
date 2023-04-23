@@ -56,18 +56,26 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   icon: const Icon(Icons.arrow_back,
                       size: 20, color: Colors.black)),
               actions: [
-                TextButton(
-                    onPressed: () => context.read<MainLogRegBloc>().add(
-                        SaveProfileUpdatedEvent(
-                            name: name_controller.text.trim(),
-                            last_name: last_name_controller.text.trim(),
-                            prof: job_name_controller.text.trim(),
-                            company: company_name_controller.text.trim(),
-                            context: context)),
-                    child: TextWidget(
-                      text: "save".tr(),
-                      color: Colors.amber.withOpacity(0.8),
-                    ))
+                if (current_state.updating)
+                  Container(
+                      padding: const EdgeInsets.only(right: 10),
+                      width: 50,
+                      height: 10,
+                      child: const Center(
+                          child: CircularProgressIndicator(
+                              color: Colors.amber, strokeWidth: 3)))
+                else
+                  TextButton(
+                      onPressed: () => context.read<MainLogRegBloc>().add(
+                          SaveProfileUpdatedEvent(
+                              name: name_controller.text.trim(),
+                              last_name: last_name_controller.text.trim(),
+                              prof: job_name_controller.text.trim(),
+                              company: company_name_controller.text.trim(),
+                              context: context)),
+                      child: TextWidget(
+                          text: "save".tr(),
+                          color: Colors.amber.withOpacity(0.8)))
               ]),
           body: Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
@@ -84,13 +92,25 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     color: Colors.grey[300]!, width: 1)),
                             child: current_state.image != null
                                 ? Image.file(current_state.image!,
-                                    width: 100, height: 100, fit: BoxFit.cover)
-                                : ImageLoaderWidget(
                                     width: 100,
                                     height: 100,
-                                    url: current_state.userModel?.img_url ?? '',
-                                    errorPictureUrl:
-                                        "assets/images/placeholder-image.png")),
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (context, url, error) =>
+                                        Image.asset(
+                                            "assets/images/placeholder-image.png",
+                                            height: 100,
+                                            width: 100,
+                                            fit: BoxFit.scaleDown))
+                                : Hero(
+                              tag: "user_profile_image",
+                                  child: ImageLoaderWidget(
+                                      width: 100,
+                                      height: 100,
+                                      url: current_state.userModel?.img_url ?? '',
+                                      errorPictureUrl:
+                                          "assets/images/placeholder-image.png",
+                                      boxFit: BoxFit.cover),
+                                )),
                         Positioned(
                             bottom: 5,
                             right: 5,

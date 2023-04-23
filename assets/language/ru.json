@@ -8,5 +8,12 @@
   "profession_and_job" : "Профессия / должность",
   "company" : "Компания",
   "image_error" : "Ошибка Изображения",
-  "choose_another_one" : "Выберите другое изоброжение"
+  "choose_another_one" : "Выберите другое изоброжение",
+  "edit_profile" : "Изменение профиля",
+  "error" : "Ошибка",
+  "error_clicking_like_plz_try_later" : "Ошибка вставки лайка. Пожалуйста повторите по-позже",
+  "home" : "Главая",
+  "search" : "Поиск",
+  "likes" : "Лайки",
+  "profile" : "Профиль"
 }
